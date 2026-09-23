@@ -131,7 +131,7 @@ class _QuestionBankState extends State<QuestionBank> {
     return Column(children: [
       AppBar(title: const Text('Question Bank'), actions: [IconButton(onPressed: () => _start(questions), icon: const Icon(Icons.play_arrow))]),
       Padding(padding: const EdgeInsets.fromLTRB(16, 4, 16, 8), child: TextField(decoration: const InputDecoration(prefixIcon: Icon(Icons.search), hintText: 'Search questions'), onChanged: (value) => setState(() => query = value))),
-      SizedBox(height: 45, child: ListView(scrollDirection: Axis.horizontal, padding: const EdgeInsets.symmetric(horizontal: 16), children: ['All', ...subjects].map((subject) => Padding(padding: const EdgeInsets.only(right: 8), child: ChoiceChip(label: Text(subject), selected: filter == subject, onSelected: (_) => setState(() => filter = subject))).toList()))),
+      SizedBox(height: 45, child: ListView(scrollDirection: Axis.horizontal, padding: const EdgeInsets.symmetric(horizontal: 16), children: ['All', ...subjects].map((subject) => Padding(padding: const EdgeInsets.only(right: 8), child: ChoiceChip(label: Text(subject), selected: filter == subject, onSelected: (_) => setState(() => filter = subject)))).toList()))),
       Expanded(child: ListView.builder(itemCount: questions.length, itemBuilder: (_, index) { final question = questions[index]; return ListTile(leading: CircleAvatar(child: Text('${index + 1}')), title: Text(question.text, maxLines: 2, overflow: TextOverflow.ellipsis), subtitle: Text('${question.subject} • ${question.difficulty}'), trailing: IconButton(icon: Icon(widget.store.bookmarks.contains(question.id) ? Icons.bookmark : Icons.bookmark_border), onPressed: () => widget.store.toggleBookmark(question))); })),
     ]);
   }
